@@ -13,7 +13,7 @@ import { IoIosCloseCircleOutline } from 'react-icons/io'
 function App() {
   const audioRef = useRef()
   const dialogRef = useRef()
-  const [songs, setSongs] = useState(data)
+  const songs = data
   const [playing, setPlaying] = useState(false)
   const [durationPlayed, setDurationPlayed] = useState(0)
   const [totalDuration, setTotalDuration] = useState(0)
@@ -50,6 +50,10 @@ function App() {
   }
 
   const handleNextClick = () => {
+    if(shuffle){
+      playRandomSong()
+      return
+    }
     if (currentSong === songs.length - 1) {
       setCurrentSong(0)
     } else setCurrentSong((val) => val + 1)
@@ -122,7 +126,6 @@ function App() {
                   setShuffle(false)
                 } else {
                   setShuffle(true)
-                  playRandomSong()
                   setLoop(false)
                 }
               }}
